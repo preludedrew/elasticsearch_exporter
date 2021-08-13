@@ -40,6 +40,45 @@ type NodeStatsNodeResponse struct {
 	HTTP             map[string]interface{}                     `json:"http"`
 	Transport        NodeStatsTransportResponse                 `json:"transport"`
 	Process          NodeStatsProcessResponse                   `json:"process"`
+	Ingest           NodeStatsIngestResponse                    `json:"ingest"`
+}
+
+// NodeStatsIngestResponse
+type NodeStatsIngestResponse struct {
+	Total     NodeStatsIngestTotalResponse                `json:"total"`
+	Pipelines map[string]NodeStatsIngestPipelinesResponse `json:"pipelines"`
+}
+
+// NodeStatsIngestTotalResponse
+type NodeStatsIngestTotalResponse struct {
+	Count    int64 `json:"count"`
+	TimeInMs int64 `json:"time_in_millis"`
+	Current  int64 `json:"current"`
+	Failed   int64 `json:"failed"`
+}
+
+// NodeStatsIngestPipelinesResponse
+type NodeStatsIngestPipelinesResponse struct {
+	Count      int64                                        `json:"count"`
+	TimeInMs   int64                                        `json:"time_in_millis"`
+	Current    int64                                        `json:"current"`
+	Failed     int64                                        `json:"failed"`
+	Processors []map[string]NodeStatsIngestPipelinesProcessorsResponse   `json:"processors"`
+}
+
+// NodeStatsIngestPipelinesProcessorsResponse
+type NodeStatsIngestPipelinesProcessorsResponse struct {
+	Type  string                                          `json:"type"`
+	Stats NodeStatsIngestPipelinesProcessorsStatsResponse `json:"stats"`
+}
+
+// NodeStatsIngestPipelinesProcessorsStatsResponse
+type NodeStatsIngestPipelinesProcessorsStatsResponse struct {
+	Count    int64 `json:"count"`
+	Time     int64 `json:"count"`
+	TimeInMs int64 `json:"time_in_millis"`
+	Current  int64 `json:"current"`
+	Failed   int64 `json:"failed"`
 }
 
 // NodeStatsBreakersResponse is a representation of a statistics about the field data circuit breaker
